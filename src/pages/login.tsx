@@ -12,7 +12,7 @@ export default function LoginPage() {
       <Typography color="text.secondary" mb={4}>
         Login to access {APP_NAME}
       </Typography>
-      <LoginForm />;
+      <LoginForm />
     </>
   );
 }
