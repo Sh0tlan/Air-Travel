@@ -20,12 +20,14 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    // import Alliases
+    /* Import Aliases */
     "baseUrl": ".",
     "paths": {
       "@pages/*": ["src/pages/*"],
       "@features/*": ["src/features/*"],
-      "@config/*": ["src/app/config/*"]
+      "@config/*": ["src/app/config/*"],
+      "@store/*": ["src/app/store/*"],
+      "@services/*": ["src/app/services/*"]
     }
   },
   "include": ["src"],

@@ -1,19 +1,57 @@
-import { createTheme } from '@mui/material';
+import { type LinkProps, createTheme } from '@mui/material';
 
 import { FontFamilies } from './FontFamilies';
 import { FontWeights } from './FontWeights';
+import LinkBehavior from './LinkBehavior';
 
 const theme = createTheme({
   palette: {
-    primary: { main: '#729E65' },
+    primary: {
+      main: '#729E65',
+    },
+    text: {
+      primary: '#223644',
+      secondary: '#64727C',
+    },
+  },
+  components: {
+    MuiInputBase: {
+      defaultProps: {
+        style: {
+          fontFamily: FontFamilies.poppins,
+          fontWeight: FontWeights.regular,
+          fontSize: '1rem',
+          lineHeight: '1.5rem',
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.875rem',
+          lineHeight: '1.313rem',
+          fontFamily: FontFamilies.roboto,
+        },
+      },
+    },
+    MuiLink: {
+      defaultProps: {
+        component: LinkBehavior,
+      } as LinkProps,
+    },
+    MuiButtonBase: {
+      defaultProps: {
+        LinkComponent: LinkBehavior,
+      },
+    },
   },
 });
 
 theme.typography.h1 = {
-  fontSize: '2rem',
-  lineHeight: '3rem',
   fontFamily: FontFamilies.poppins,
   fontWeight: FontWeights.medium,
+  fontSize: '2rem',
+  lineHeight: '3rem',
   [theme.breakpoints.down('md')]: {
     fontSize: '1.5rem',
     lineHeight: '2.25rem',
@@ -102,4 +140,5 @@ theme.typography.caption = {
   fontSize: '0.875rem',
   lineHeight: '1.313rem',
 };
+
 export default theme;

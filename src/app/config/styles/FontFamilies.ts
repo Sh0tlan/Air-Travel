@@ -1,3 +1,4 @@
 export const FontFamilies = {
-  popins: 'Popins, Roboto, san-serif',
+  poppins: 'Poppins, Roboto, sans-serif',
+  roboto: 'Roboto, Poppins, sans-serif',
 };
