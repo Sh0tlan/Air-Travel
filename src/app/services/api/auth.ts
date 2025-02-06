@@ -2,6 +2,7 @@ import { FirebaseError } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
 } from 'firebase/auth';
 
@@ -12,7 +13,6 @@ async function handleAuthError(authFunction: () => Promise<void>) {
     await authFunction();
   } catch (error) {
     if (error instanceof FirebaseError) {
-      console.log(error, 'error');
       throw Error(mapAuthCodeToMessage(error.code));
     }
 
@@ -35,4 +35,8 @@ export async function login(email: string, password: string) {
   return handleAuthError(async () => {
     await signInWithEmailAndPassword(auth, email, password);
   });
+}
+
+export async function logout() {
+  return signOut(auth);
 }
