@@ -1,2 +1,2 @@
-export { Colors } from './colors';
+export { Colors } from './Colors';
 export { default as theme } from './theme';
