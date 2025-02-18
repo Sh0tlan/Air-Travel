@@ -1,23 +1,43 @@
 import { Route, Routes } from 'react-router-dom';
 
+import AccountLayout from '@features/ui/layout/AccountLayout/AccountLayout';
 import AuthLayout from '@features/ui/layout/AuthLayout';
+import AddTrip from '@pages/account/add-trip';
 import Dashboard from '@pages/account/dashboard';
-import Home from '@pages/home';
-import Login from '@pages/login';
+import TripsPage from '@pages/account/trips';
+import HomePage from '@pages/home';
+import LoginPage from '@pages/login';
 import NotFoundPage from '@pages/not-found';
-import SignUp from '@pages/sign-up';
+import SignUpPage from '@pages/sign-up';
 
+import ProtectedRoute from '../components/ProtectedRoute';
 import { AppRoutes } from './AppRoutes';
 
 export default function AppRouter() {
   return (
     <Routes>
-      <Route path={AppRoutes.home} element={<Home />} />
+      {/* Public Pages */}
+      <Route path={AppRoutes.home} element={<HomePage />} />
+
       <Route element={<AuthLayout />}>
-        <Route path={AppRoutes.singUp} element={<SignUp />} />
-        <Route path={AppRoutes.login} element={<Login />} />
+        <Route path={AppRoutes.singUp} element={<SignUpPage />} />
+        <Route path={AppRoutes.login} element={<LoginPage />} />
       </Route>
-      <Route path={AppRoutes.dashboard} element={<Dashboard />} />
+
+      {/* Protected Page */}
+      <Route
+        element={
+          <ProtectedRoute>
+            <AccountLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path={AppRoutes.dashboard} element={<Dashboard />} />
+        <Route path={AppRoutes.trips} element={<TripsPage />} />
+        <Route path={AppRoutes.addTrip} element={<AddTrip />} />
+      </Route>
+
+      {/* Not Found Page */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

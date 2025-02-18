@@ -9,19 +9,16 @@ interface UserInfo {
   email: string;
   displayName: string | null | undefined;
 }
-
 interface AuthState {
   user: UserInfo | null;
   status: 'loading' | 'idle' | 'failed' | 'succeeded';
   error?: string | null;
 }
-
 const initialState: AuthState = {
   user: null,
   status: 'idle',
   error: null,
 };
-
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -33,7 +30,7 @@ export const authSlice = createSlice({
     },
     logout: (state) => {
       state.user = null;
-      state.status = 'idle';
+      state.status = 'succeeded';
       state.error = null;
     },
     setUserName: (state, action: PayloadAction<string | null | undefined>) => {
@@ -69,9 +66,9 @@ export const authSlice = createSlice({
         state.error = null;
       }),
 });
-
 export const { userLoaded, logout, setUserName } = authSlice.actions;
 
+export const selectAuth = (state: RootState) => state.auth;
 export const selectUser = (state: RootState) => state.auth.user;
 
 export default authSlice.reducer;
