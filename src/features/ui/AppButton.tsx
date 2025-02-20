@@ -8,6 +8,7 @@ interface Props {
   loading?: boolean;
   children: React.ReactNode;
   endIcon?: React.ReactNode;
+  startIcon?: React.ReactNode;
   onClick?: () => void;
   LinkComponent?: React.ElementType;
   href?: string;
@@ -24,6 +25,7 @@ export default function AppButton({
   LinkComponent,
   loading,
   endIcon,
+  startIcon,
   sx,
 }: Props) {
   return (
@@ -35,6 +37,7 @@ export default function AppButton({
       type={type}
       variant={variant}
       endIcon={endIcon}
+      startIcon={startIcon}
       sx={{
         borderRadius: 2,
         height: { xs: 48, md: 56 },
