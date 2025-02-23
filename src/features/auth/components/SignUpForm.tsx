@@ -69,7 +69,7 @@ export default function SignUpForm() {
             autoComplete="email"
             helperText={fieldState.error?.message}
             error={Boolean(fieldState.error)}
-            sx={{ mb: 3, mt: 0 }}
+            sx={{ mb: 3 }}
             {...field}
           />
         )}
@@ -90,7 +90,7 @@ export default function SignUpForm() {
             autoComplete="current-password"
             helperText={fieldState.error?.message}
             error={Boolean(fieldState.error)}
-            sx={{ mb: 3, mt: 0 }}
+            sx={{ mb: 3 }}
             {...field}
           />
         )}
