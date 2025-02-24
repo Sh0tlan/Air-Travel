@@ -66,6 +66,7 @@ export default function AppDialog({
         sx={{
           pt: 8.75,
           px: { xs: MOBILE_PADDING_X, md: DESKTOP_PADDING_X },
+          pb: 3,
         }}
       >
         {title}
@@ -73,7 +74,7 @@ export default function AppDialog({
       <DialogContent
         sx={{
           px: { xs: MOBILE_PADDING_X, md: DESKTOP_PADDING_X },
-          py: 3,
+          py: 0,
         }}
       >
         {children}
