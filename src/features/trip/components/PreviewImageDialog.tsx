@@ -4,17 +4,23 @@ import { ButtonBase, Grid } from '@mui/material';
 
 import AppDialog from '@features/ui/AppDialog';
 
-import { TRIP_PREVIEW_IMAGES, TripPreviewImage } from '../data';
+import { TRIP_PREVIEW_IMAGES } from '../data';
+import { type Trip } from '../types';
 import UploadFileButton from './UploadFileButton';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  onSave: (previewImage: Trip['previewImage']) => void;
 }
 
-export default function PreviewImageDialog({ isOpen, onClose }: Props) {
+export default function PreviewImageDialog({ isOpen, onClose, onSave }: Props) {
   const [selectPreviewImage, setSelectedPreviewImage] =
-    useState<null | TripPreviewImage>(null);
+    useState<Trip['previewImage']>(null);
+
+  const onSaveClick = () => {
+    onSave(selectPreviewImage);
+  };
 
   return (
     <AppDialog
@@ -22,9 +28,7 @@ export default function PreviewImageDialog({ isOpen, onClose }: Props) {
       primaryButtonText="Save"
       isOpen={isOpen}
       onClose={onClose}
-      onPrimaryButtonClick={function (): void {
-        throw new Error('Function not implemented.');
-      }}
+      onPrimaryButtonClick={onSaveClick}
     >
       <Grid container spacing={{ xs: 0.5, md: 1.5 }} columns={{ xs: 2, md: 3 }}>
         {TRIP_PREVIEW_IMAGES.map((image) => (
@@ -35,11 +39,13 @@ export default function PreviewImageDialog({ isOpen, onClose }: Props) {
                 overflow: 'hidden',
                 border: 4,
                 borderColor:
-                  selectPreviewImage?.id === image.id
+                  selectPreviewImage?.templateImageId === image.id
                     ? 'primary.main'
                     : 'white',
               }}
-              onClick={() => setSelectedPreviewImage(image)}
+              onClick={() =>
+                setSelectedPreviewImage({ templateImageId: image.id })
+              }
             >
               <img
                 src={image.src}
