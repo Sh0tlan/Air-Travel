@@ -2,7 +2,7 @@ import { Step, StepLabel, Stepper } from '@mui/material';
 
 import { useBreakpoints } from '@hooks/useBreakpoints';
 
-import { WizardSteps } from '../../types';
+import type { WizardSteps } from '../../types';
 
 interface Props {
   currentStep: number;
@@ -15,7 +15,7 @@ export default function DesktopStepper({ currentStep, steps }: Props) {
     <Stepper
       activeStep={currentStep}
       alternativeLabel={!xl}
-      sx={{ display: { xs: 'none', md: 'flex' }, mb: 8, ml: -1 }}
+      sx={{ display: { xs: 'none', lg: 'flex' }, mb: 8, ml: -1 }}
     >
       {steps.map(({ title }) => (
         <Step key={title}>
