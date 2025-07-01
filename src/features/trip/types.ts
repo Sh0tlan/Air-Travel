@@ -19,6 +19,10 @@ export interface Place {
   isChecked: boolean;
 }
 
+export interface DocumentToUpload extends TripFile {
+  file?: File;
+}
+
 export interface TripFile {
   fileName: string;
   storagePath?: string | null;
