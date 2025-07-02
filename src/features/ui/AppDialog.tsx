@@ -19,7 +19,7 @@ interface Props {
   children: React.ReactNode;
   title: string;
   primaryButtonText: string;
-  isForm: boolean;
+  isForm?: boolean;
   maxWidth?: number;
 }
 
