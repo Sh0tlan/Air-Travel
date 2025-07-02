@@ -15,11 +15,11 @@ import AppButton from './AppButton';
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  onPrimaryButtonClick: () => void;
+  onPrimaryButtonClick?: () => void;
   children: React.ReactNode;
   title: string;
-  primaryButtonText: string;
-  isForm: boolean;
+  primaryButtonText?: string;
+  isForm?: boolean;
   maxWidth?: number;
 }
 
