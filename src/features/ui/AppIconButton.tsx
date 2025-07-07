@@ -1,4 +1,5 @@
-import { Button, type SxProps, type Theme } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { type SxProps, type Theme } from '@mui/material';
 
 interface Props {
   isSmall?: boolean;
@@ -6,29 +7,28 @@ interface Props {
   'aria-label': string;
   children: JSX.Element;
   sx?: SxProps<Theme>;
+  disabled?: boolean;
+  variant?: 'outlined' | 'contained';
+  isLoading?: boolean;
 }
 
-export default function AppIconButton({
-  isSmall,
-  onClick,
-  'aria-label': ariaLabel,
-  children,
-  sx = {},
-}: Props) {
+export default function AppIconButton(props: Props) {
   return (
-    <Button
-      onClick={onClick}
-      aria-label={ariaLabel}
-      variant="outlined"
+    <LoadingButton
+      loading={props.isLoading}
+      onClick={props.onClick}
+      aria-label={props['aria-label']}
+      variant={props.variant ?? 'outlined'}
+      disabled={props.disabled}
       sx={{
         borderRadius: 2,
         minWidth: 'auto',
-        width: { xs: isSmall ? 34 : 48, md: isSmall ? 34 : 58 },
-        height: { xs: isSmall ? 34 : 48, md: isSmall ? 34 : 58 },
-        ...sx,
+        width: props.isSmall ? 34 : { xs: 48, md: 58 },
+        height: props.isSmall ? 34 : { xs: 48, md: 58 },
+        ...props.sx,
       }}
     >
-      {children}
-    </Button>
+      {props.children}
+    </LoadingButton>
   );
 }
