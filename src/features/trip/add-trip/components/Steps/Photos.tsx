@@ -2,42 +2,39 @@ import FilesForm from '@features/trip/components/Files/FilesForm';
 import { TripFile } from '@features/trip/types';
 import { useAppDispatch, useAppSelector } from '@store/index';
 
-import {
-  nextStep,
-  selectWizardTrip,
-  setDocuments,
-} from '../../store/tripWizardSlice';
+import { selectWizardTrip, setPhotos } from '../../store/tripWizardSlice';
 import Pagination from '../Navigation/Pagination';
 
-export default function Documents() {
-  const { documents, onSubmit, onChange } = useDocumentsForm();
+export default function Photos() {
+  const { photos, onSubmit, onChange } = usePhotosForm();
 
   return (
     <FilesForm
-      defaultFiles={documents}
+      defaultFiles={photos}
       onSubmit={onSubmit}
       SubmitComponent={<Pagination />}
       onChange={onChange}
-      type={'document'}
+      type={'photo'}
     />
   );
 }
 
-function useDocumentsForm() {
+function usePhotosForm() {
   const dispatch = useAppDispatch();
   const trip = useAppSelector(selectWizardTrip);
 
   const onSubmit = (data: TripFile[]) => {
-    dispatch(setDocuments(data));
-    dispatch(nextStep());
+    dispatch(setPhotos(data));
+
+    // TODO: Save wizard data
   };
 
   const onChange = (data: TripFile[]) => {
-    dispatch(setDocuments(data));
+    dispatch(setPhotos(data));
   };
 
   return {
-    documents: trip.documents,
+    photos: trip.photos,
     onSubmit,
     onChange,
   };

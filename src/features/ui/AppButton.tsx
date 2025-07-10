@@ -13,6 +13,7 @@ interface Props {
   LinkComponent?: React.ElementType;
   href?: string;
   sx?: SxProps<Theme>;
+  disabled?: boolean;
 }
 
 export default function AppButton({
@@ -26,6 +27,7 @@ export default function AppButton({
   loading,
   endIcon,
   startIcon,
+  disabled,
   sx,
 }: Props) {
   return (
@@ -37,6 +39,7 @@ export default function AppButton({
       type={type}
       variant={variant}
       endIcon={endIcon}
+      disabled={disabled}
       startIcon={startIcon}
       sx={{
         borderRadius: 2,

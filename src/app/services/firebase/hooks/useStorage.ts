@@ -10,6 +10,7 @@ import { storage } from '../firebase';
 
 interface Props {
   onAllUploadSuccess: (uploadedFiles: TripFile[]) => void;
+  onOneUploadSuccess?: (index: number, uploadedFiles: TripFile) => void;
 }
 
 const defaultState = {
@@ -32,10 +33,9 @@ interface State {
   removingFilePath: null | string;
 }
 
-export function useStorage({ onAllUploadSuccess }: Props) {
-  const { showErrorMessage } = useToast();
+export function useStorage({ onAllUploadSuccess, onOneUploadSuccess }: Props) {
   const user = useAppSelector(selectUser);
-
+  const { showErrorMessage } = useToast();
   const [state, setState] = useState<State>(defaultState);
 
   useEffect(() => {
@@ -78,17 +78,19 @@ export function useStorage({ onAllUploadSuccess }: Props) {
             uploadedFiles: newUploadedFiles,
           };
         });
-
         return;
-      } else if (!file?.file) {
+      }
+
+      if (!file?.file) {
         setState((prevState) => {
           const newErrors = [...prevState.uploadErrors];
-          newErrors[index] = `We are unable to get the file to upload it! `;
+          newErrors[index] = `We are unable to get the file to upload it!`;
           return {
             ...prevState,
             uploadErrors: newErrors,
           };
         });
+
         return;
       }
 
@@ -127,21 +129,6 @@ export function useStorage({ onAllUploadSuccess }: Props) {
           });
         },
         () => {
-          if (index === 3) {
-            setState((prevState) => {
-              const newProgresses = [...prevState.uploadProgresses];
-              newProgresses[index] = undefined;
-
-              const newErrors = [...prevState.uploadErrors];
-              newErrors[index] = `Something went wrong: TEST`;
-              return {
-                ...prevState,
-                uploadProgresses: newProgresses,
-                uploadErrors: newErrors,
-              };
-            });
-            return;
-          }
           setState((prevState) => {
             const newProgresses = [...prevState.uploadProgresses];
             newProgresses[index] = undefined;
@@ -151,6 +138,7 @@ export function useStorage({ onAllUploadSuccess }: Props) {
               fileName: file.fileName,
               storagePath: uploadTask.snapshot.ref.fullPath,
             };
+            onOneUploadSuccess?.(index, newUploadedFiles[index]);
 
             return {
               ...prevState,
