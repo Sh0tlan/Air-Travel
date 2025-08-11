@@ -163,6 +163,7 @@ function usePackingListsForm({ defaultPackingLists }: Props) {
     },
   });
   const packingLists = watch('packingLists');
+
   const { append, remove, update } = useFieldArray({
     control,
     name: 'packingLists',

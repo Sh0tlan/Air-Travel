@@ -1,5 +1,6 @@
 import FilesForm from '@features/trip/components/Files/FilesForm';
 import { TripFile } from '@features/trip/types';
+import addTrip from '@services/api/trip';
 import { useAppDispatch, useAppSelector } from '@store/index';
 
 import { selectWizardTrip, setPhotos } from '../../store/tripWizardSlice';
@@ -23,10 +24,13 @@ function usePhotosForm() {
   const dispatch = useAppDispatch();
   const trip = useAppSelector(selectWizardTrip);
 
-  const onSubmit = (data: TripFile[]) => {
+  const onSubmit = async (data: TripFile[]) => {
     dispatch(setPhotos(data));
 
-    // TODO: Save wizard data
+    await addTrip({
+      ...trip,
+      photos: data,
+    });
   };
 
   const onChange = (data: TripFile[]) => {
