@@ -1,17 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 
+import { AppRoutes } from '@config/routes';
 import AccountLayout from '@features/ui/layout/AccountLayout/AccountLayout';
 import AuthLayout from '@features/ui/layout/AuthLayout';
-import AddTrip from '@pages/account/add-trip';
 import Dashboard from '@pages/account/dashboard';
-import TripsPage from '@pages/account/trips';
+import AddTrip from '@pages/account/trips/add-trip';
+import TripDetailsPage from '@pages/account/trips/trip-details';
+import TripsPage from '@pages/account/trips/trips';
 import HomePage from '@pages/home';
 import LoginPage from '@pages/login';
 import NotFoundPage from '@pages/not-found';
 import SignUpPage from '@pages/sign-up';
 
-import ProtectedRoute from '../components/ProtectedRoute';
-import { AppRoutes } from './AppRoutes';
+import ProtectedRoute from './ProtectedRoute';
 
 export default function AppRouter() {
   return (
@@ -35,6 +36,10 @@ export default function AppRouter() {
         <Route path={AppRoutes.dashboard} element={<Dashboard />} />
         <Route path={AppRoutes.trips} element={<TripsPage />} />
         <Route path={AppRoutes.addTrip} element={<AddTrip />} />
+        <Route
+          path={`${AppRoutes.trips}/:tripId`}
+          element={<TripDetailsPage />}
+        />
       </Route>
 
       {/* Not Found Page */}

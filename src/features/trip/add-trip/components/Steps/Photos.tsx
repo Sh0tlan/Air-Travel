@@ -1,6 +1,6 @@
 import FilesForm from '@features/trip/components/Files/FilesForm';
 import { TripFile } from '@features/trip/types';
-import addTrip from '@services/api/trip';
+import { addTrip } from '@services/api/trip';
 import { useAppDispatch, useAppSelector } from '@store/index';
 
 import { selectWizardTrip, setPhotos } from '../../store/tripWizardSlice';
