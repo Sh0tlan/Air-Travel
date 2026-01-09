@@ -13,7 +13,7 @@ import {
 
 import { Colors } from '@config/styles';
 import PreviewImageDialog from '@features/trip/components/PreviewImageDialog';
-import { TRIP_PREVIEW_IMAGES } from '@features/trip/data';
+import usePreviewImage from '@features/trip/hook/usePreviewImage';
 import { type Trip } from '@features/trip/types';
 import DataSelectinInput from '@features/ui/form/DataSelectinInput';
 import useDialog from '@hooks/useDialog';
@@ -34,7 +34,7 @@ interface FormInput {
   endDate: Trip['endDate'];
 }
 
-export default function LoginForm() {
+export default function TripInfo() {
   const { isOpen, open, close } = useDialog();
   const {
     handleSubmit,
@@ -81,7 +81,7 @@ export default function LoginForm() {
                   borderRadius: 4,
                   objectFit: 'cover',
                 }}
-                src={previewImageSrc.src}
+                src={previewImageSrc}
                 alt="Trip preview"
               />
             ) : (
@@ -205,11 +205,7 @@ function useTravelInfoForm({
 
   const formValues = watch();
 
-  const previewImageSrc = formValues.previewImage?.templateImageId
-    ? TRIP_PREVIEW_IMAGES.find(
-        (image) => image.id === formValues.previewImage?.templateImageId,
-      )
-    : null;
+  const previewImageSrc = usePreviewImage(formValues?.previewImage);
 
   const onPreviewImageSave = (prievImage: Trip['previewImage']) => {
     closePreviewImageDialog();
