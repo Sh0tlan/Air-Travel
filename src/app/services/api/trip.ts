@@ -5,6 +5,7 @@ import {
   getDocs,
   query,
   setDoc,
+  updateDoc,
   where,
 } from 'firebase/firestore';
 
@@ -42,6 +43,22 @@ export async function getTripById(tripID?: string) {
   }
 
   return tripSnap.data() as Trip;
+}
+
+export async function updateTrip(tripId: string, data: Partial<Trip>) {
+  if (!auth.currentUser) {
+    throw Error('Looks like you are not-authorized to make this change!');
+  }
+
+  if (!tripId) {
+    throw new Error('Trip not found!');
+  }
+
+  const tripRef = doc(firestore, 'trips', tripId);
+
+  await updateDoc(tripRef, data);
+
+  return true;
 }
 
 export async function addTrip(trip: Trip) {

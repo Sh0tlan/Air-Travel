@@ -1,2 +1,2 @@
 export { login, logout, register } from './auth';
-export { addTrip, getTripById, getTrips } from './trip';
+export { addTrip, getTripById, getTrips, updateTrip } from './trip';
