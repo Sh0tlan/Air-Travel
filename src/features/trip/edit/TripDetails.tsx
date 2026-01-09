@@ -1,17 +1,31 @@
 import { useParams } from 'react-router-dom';
 
-import { CircularProgress, Stack } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import {
+  Breadcrumbs,
+  CircularProgress,
+  Link,
+  Stack,
+  Typography,
+} from '@mui/material';
 
-import { useGetTripDetailsQuery } from '../store/tripsApi';
+import { AppRoutes } from '@config/routes';
+import { Colors } from '@config/styles';
+import AppButton from '@features/ui/AppButton';
+
+import { useGetTripQuery, useUpdateTripMutation } from '../store/tripsApi';
+import { Trip } from '../types';
+import Hero from './Hero';
+import TripTabs from './Tabs/TripTabs';
 
 export default function TripDetails() {
   const { tripId } = useParams();
-  const {
-    data: trip,
-    isLoading,
-    isSuccess,
-    isError,
-  } = useGetTripDetailsQuery(tripId);
+  const { data: trip, isLoading, isSuccess, isError } = useGetTripQuery(tripId);
+  const [updateTrip] = useUpdateTripMutation();
+
+  const onTripUpdate = (data: Partial<Trip>) => {
+    updateTrip({ id: trip!.id, data });
+  };
 
   if (isLoading) {
     return (
@@ -20,7 +34,31 @@ export default function TripDetails() {
       </Stack>
     );
   } else if (isSuccess) {
-    return <>{trip.name}</>;
+    return (
+      <Stack pb={4}>
+        <Stack
+          sx={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+          }}
+        >
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href={AppRoutes.trips}>
+              Trips
+            </Link>
+            <Typography color={Colors.secondaryBlue} variant="subtitle2">
+              {trip.name}
+            </Typography>
+          </Breadcrumbs>
+          <AppButton endIcon={<DeleteIcon />} isSmall color="error">
+            Delete
+          </AppButton>
+        </Stack>
+        <Hero trip={trip} />
+        <TripTabs trip={trip} onUpdate={onTripUpdate} />
+      </Stack>
+    );
   } else if (isError) {
     throw Error;
   }

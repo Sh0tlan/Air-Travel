@@ -14,6 +14,15 @@ interface Props {
   href?: string;
   sx?: SxProps<Theme>;
   disabled?: boolean;
+  isSmall?: boolean;
+  color?:
+    | 'error'
+    | 'inherit'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'info'
+    | 'warning';
 }
 
 export default function AppButton({
@@ -27,7 +36,9 @@ export default function AppButton({
   loading,
   endIcon,
   startIcon,
+  isSmall,
   disabled,
+  color,
   sx,
 }: Props) {
   return (
@@ -41,11 +52,12 @@ export default function AppButton({
       endIcon={endIcon}
       disabled={disabled}
       startIcon={startIcon}
+      color={color}
       sx={{
         borderRadius: 2,
         height: {
-          xs: variant === 'text' ? 42 : 48,
-          md: variant === 'text' ? 48 : 56,
+          xs: variant === 'text' || isSmall ? 42 : 48,
+          md: variant === 'text' || isSmall ? 48 : 56,
         },
         textTransform: 'none',
         width: fullWidth ? '100%' : 'fit-content',

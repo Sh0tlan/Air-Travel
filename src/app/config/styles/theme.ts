@@ -1,4 +1,5 @@
-import { type LinkProps, createTheme } from '@mui/material';
+import type { LinkProps } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
 
 import { Colors } from './Colors';
 import { FontFamilies } from './FontFamilies';
@@ -9,6 +10,9 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#729E65',
+    },
+    error: {
+      main: '#EB5757',
     },
     text: {
       primary: '#223644',
@@ -71,6 +75,30 @@ const theme = createTheme({
           '.Mui-completed': {
             fontWeight: FontWeights.regular,
           },
+        },
+      },
+    },
+    MuiBreadcrumbs: {
+      defaultProps: {
+        style: {
+          fontSize: '1rem',
+          lineHeight: '1.5rem',
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          '& button': {
+            minHeight: 65,
+          },
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: Colors.disabled,
         },
       },
     },
