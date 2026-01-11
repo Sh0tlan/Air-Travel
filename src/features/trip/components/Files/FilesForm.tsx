@@ -129,6 +129,7 @@ export default function FilesForm(props: Props) {
                   ref={index === files.length - 1 ? fileInputRef : null}
                   type="file"
                   id="fileInput"
+                  accept={acceptedFileFormats}
                   hidden
                   onChange={(event) => onFileInputChange(event, field.onChange)}
                 />
