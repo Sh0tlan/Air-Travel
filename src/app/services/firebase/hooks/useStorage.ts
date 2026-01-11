@@ -178,9 +178,12 @@ export function useStorage({ onAllUploadSuccess, onOneUploadSuccess }: Props) {
     return false;
   };
 
+  const resetUpload = () => setState(defaultState);
+
   return {
     ...state,
     uploadFiles,
     removeFile,
+    resetUpload,
   };
 }
