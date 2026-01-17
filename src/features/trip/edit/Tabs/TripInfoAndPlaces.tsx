@@ -10,7 +10,7 @@ import PlacesForm from '@features/trip/components/PlacesForm';
 import DateSelectInput from '@features/ui/form/DataSelectinInput';
 
 import type { Trip } from '../../types';
-import ContentCard from './ContentTab';
+import ContentCard from './ContentCard';
 
 interface Props {
   trip: Trip;

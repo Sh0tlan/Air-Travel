@@ -47,7 +47,11 @@ export default function Expenses() {
 
       <ExpenseDialog onSave={addExpense} isOpen={isOpen} onClose={close} />
       {expenses.length > 0 && (
-        <ExpensesTable expenses={expenses} onDelete={removeExpense} />
+        <ExpensesTable
+          expenses={expenses}
+          onDelete={removeExpense}
+          autoScrollOnChange
+        />
       )}
       <Pagination />
     </Stack>

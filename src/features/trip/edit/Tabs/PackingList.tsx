@@ -1,7 +1,7 @@
 import PackingForm from '@features/trip/components/PackingForm';
 import { type Trip } from '@features/trip/types';
 
-import ContentCard from './ContentTab';
+import ContentCard from './ContentCard';
 
 interface Props {
   trip: Trip;
