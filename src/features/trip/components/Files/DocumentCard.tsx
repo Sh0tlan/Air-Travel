@@ -94,9 +94,9 @@ export default function DocumentCard({
             sx={{
               overflow: 'hidden',
               display: '-webkit-box',
-              '-webkit-line-clamp': '1',
-              'line-clamp': '1',
-              '-webkit-box-orient': 'vertical',
+              WebkitLineClamp: '1',
+              lineClamp: '1',
+              WebkitBoxOrient: 'vertical',
             }}
           >
             {name}
