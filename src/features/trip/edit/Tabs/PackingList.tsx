@@ -10,7 +10,6 @@ interface Props {
 
 export default function PackingList({ trip, onUpdate }: Props) {
   const onChange = (packingLists: Trip['packingLists']) => {
-    console.log('change');
     onUpdate({ packingLists });
   };
 
