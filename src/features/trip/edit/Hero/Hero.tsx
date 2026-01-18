@@ -16,7 +16,6 @@ export default function Hero({ trip, onUpdate }: Props) {
     locationFrom: Trip['locationFrom'];
     destinations: Trip['destinations'];
   }) => {
-    console.log('changes');
     onUpdate({ ...newValues });
   };
 
