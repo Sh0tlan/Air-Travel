@@ -51,7 +51,7 @@ export const tripsApi = createApi({
           data: true,
         };
       },
-      invalidatesTags: (_, __, { id }) => [{ type: 'Trips', id }],
+      invalidatesTags: () => [{ type: 'Trips', id: 'LIST' }],
     }),
     deleteTrip: builder.mutation<boolean, string>({
       queryFn: async (tripId) => {
