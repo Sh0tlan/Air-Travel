@@ -30,7 +30,29 @@ export default function DateSelectInput({
     <Controller
       name={name}
       control={control}
-      rules={{ required: requireErrorText }}
+      rules={{
+        required: requireErrorText,
+        validate: {
+          ...(minDate
+            ? {
+                minDate: (value) =>
+                  !value ||
+                  dayjs(value).isSame(dayjs(minDate), 'day') ||
+                  dayjs(value).isAfter(dayjs(minDate)) ||
+                  'Date cannot be before start date',
+              }
+            : {}),
+          ...(maxDate
+            ? {
+                maxDate: (value) =>
+                  !value ||
+                  dayjs(value).isSame(dayjs(maxDate), 'day') ||
+                  dayjs(value).isBefore(dayjs(maxDate)) ||
+                  'Date cannot be after end date',
+              }
+            : {}),
+        },
+      }}
       render={({ field: { ref, ...field }, fieldState }) => (
         <DatePicker
           label={label}

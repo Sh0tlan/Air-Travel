@@ -143,7 +143,7 @@ export default function TripInfo() {
               name="endDate"
               control={control}
               label="End date"
-              maxDate={formValues.endDate}
+              minDate={formValues.endDate}
               requireErrorText="Please specify end date!"
             />
           </Stack>
