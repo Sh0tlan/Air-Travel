@@ -12,6 +12,7 @@ import LoginPage from '@pages/login';
 import NotFoundPage from '@pages/not-found';
 import SignUpPage from '@pages/sign-up';
 
+import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
 
 export default function AppRouter() {
@@ -20,7 +21,7 @@ export default function AppRouter() {
       {/* Public Pages */}
       <Route path={AppRoutes.home} element={<HomePage />} />
 
-      <Route element={<AuthLayout />}>
+      <Route element={<GuestRoute><AuthLayout /></GuestRoute>}>
         <Route path={AppRoutes.singUp} element={<SignUpPage />} />
         <Route path={AppRoutes.login} element={<LoginPage />} />
       </Route>
