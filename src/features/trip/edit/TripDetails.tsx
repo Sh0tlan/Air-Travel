@@ -15,9 +15,7 @@ import AppButton from '@features/ui/AppButton';
 import AppDialog from '@features/ui/AppDialog';
 import useDialog from '@hooks/useDialog';
 import useToast from '@hooks/useToast';
-import { deleteTrip } from '@services/api';
-
-import { useGetTripQuery, useUpdateTripMutation } from '../store/tripsApi';
+import { useDeleteTripMutation, useGetTripQuery, useUpdateTripMutation } from '../store/tripsApi';
 import { Trip } from '../types';
 import Hero from './Hero/Hero';
 import TripTabs from './Tabs/TripTabs';
@@ -29,6 +27,7 @@ export default function TripDetails() {
   const { tripId } = useParams();
   const { data: trip, isLoading, isSuccess, isError } = useGetTripQuery(tripId);
   const [updateTrip] = useUpdateTripMutation();
+  const [deleteTrip] = useDeleteTripMutation();
 
   const onTripUpdate = (data: Partial<Trip>) => {
     updateTrip({ id: trip!.id, data });

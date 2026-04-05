@@ -71,4 +71,5 @@ export const {
   useGetTripQuery,
   useUpdateTripMutation,
   useAddTripMutation,
+  useDeleteTripMutation,
 } = tripsApi;
